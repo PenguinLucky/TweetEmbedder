@@ -1,0 +1,51 @@
+name: build
+
+on:
+  push:
+    paths:
+      - "src/**"
+      - "index.ts"
+      - "tsconfig.json"
+      - "package.json"
+      - "yarn.lock"
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3 # https://github.com/actions/setup-node
+        with:
+          node-version-file: .node-version
+          cache: "yarn"
+
+      # example: https://github.com/actions/cache/blob/main/examples.md#node---yarn
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v3 # https://github.com/actions/cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --prefer-offline
+
+      - name: Build
+        run: yarn build
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
