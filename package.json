@@ -1,0 +1,33 @@
+{
+  "name": "twitter-embed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "debug": "ts-node index.ts",
+    "start": "node index.js",
+    "build": "npx tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PenguinLucky/TwitterEmbed.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PenguinLucky/TwitterEmbed/issues"
+  },
+  "homepage": "https://github.com/PenguinLucky/TwitterEmbed#readme",
+  "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/md5": "^2.3.4",
+    "@types/node": "^20.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
