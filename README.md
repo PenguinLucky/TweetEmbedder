@@ -20,13 +20,13 @@ The Bot sends a message when the following conditions are matched in a message.<
 - https://x.com/{UserId}/status/{TweetId}
 - https://twitter.com/{UserId}/status/{TweetId}
 
-![Tweet](./picture/tweet.png)
+![Tweet](./images/tweet.png)
 
 ### User
 - https://x.com/{UserId}
 - https://twitter.com/{UserId}
 
-![User](./picture/user.png)
+![User](./images/user.png)
 
 ## License
 This project is available under the MIT license.<br />

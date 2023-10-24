@@ -20,13 +20,13 @@ DiscordにてTwitterの埋め込みを復活させます。
 - https://x.com/{UserId}/status/{TweetId}
 - https://twitter.com/{UserId}/status/{TweetId}
 
-![Tweet](./picture/tweet.png)
+![Tweet](./images/tweet.png)
 
 ### ユーザー
 - https://x.com/{UserId}
 - https://twitter.com/{UserId}
 
-![User](./picture/user.png)
+![User](./images/user.png)
 
 ## ライセンス
 このプロジェクトは MITライセンス の下で利用可能です。<br />
