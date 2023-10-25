@@ -12,7 +12,6 @@ if (!process.env.DISCORD_TOKEN) {
 
 const discordClient = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
-    partials: [Partials.Channel],
 });
 
 discordClient.on(Events.ClientReady, () => {
@@ -67,12 +66,14 @@ discordClient.on(Events.MessageCreate, async (message) => {
 
     if (embeds.length === 0) return;
 
-    await message.reply({
-        embeds,
-        allowedMentions: {
-            repliedUser: false,
-        },
-    });
+    await message
+        .reply({
+            embeds,
+            allowedMentions: {
+                repliedUser: false,
+            },
+        })
+        .catch(() => {});
 });
 
 discordClient.login(process.env.DISCORD_TOKEN);
