@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import path from "path";
-import { Client, Events, EmbedBuilder, GatewayIntentBits, Partials } from "discord.js";
+import { Client, Events, EmbedBuilder, GatewayIntentBits, ActivityType } from "discord.js";
 import { getTweet, getUser } from "./src/fxtwitter";
 import { createTweetEmbed, createUserEmbed } from "./src/discord";
 
@@ -14,12 +14,22 @@ const discordClient = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
 });
 
+setInterval(() => {
+    // プレイ中にサーバー数を表示する
+    const guildCount = discordClient.guilds.cache.size;
+    discordClient.user?.setActivity(`${guildCount} servers`, { type: ActivityType.Playing });
+}, 1000 * 60 * 10);
+
 discordClient.on(Events.ClientReady, () => {
     console.log("====================================");
     console.log("Bot is ready");
     console.log("Client ID: ", discordClient.user?.id);
     console.log("Client Tag: ", discordClient.user?.tag);
     console.log("====================================");
+
+    // プレイ中にサーバー数を表示する
+    const guildCount = discordClient.guilds.cache.size;
+    discordClient.user?.setActivity(`${guildCount} servers`, { type: ActivityType.Playing });
 });
 
 discordClient.on(Events.MessageCreate, async (message) => {
