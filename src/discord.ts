@@ -1,7 +1,7 @@
 import { EmbedBuilder } from "discord.js";
 import { fxtwitter } from "./types/fxtwitter";
 
-export async function createTweetEmbed(tweet: fxtwitter.Tweet): Promise<EmbedBuilder> {
+export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder {
     const embed = new EmbedBuilder();
 
     embed.setAuthor({
@@ -47,7 +47,7 @@ export async function createTweetEmbed(tweet: fxtwitter.Tweet): Promise<EmbedBui
     return embed;
 }
 
-export async function createUserEmbed(user: fxtwitter.User): Promise<EmbedBuilder> {
+export function createUserEmbed(user: fxtwitter.User): EmbedBuilder {
     const embed = new EmbedBuilder();
 
     embed.setTitle(user.name);

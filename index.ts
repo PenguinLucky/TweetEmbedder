@@ -49,7 +49,7 @@ discordClient.on(Events.MessageCreate, async (message) => {
             const tweet = await getTweet(tweetId, authorId);
             if (!tweet) continue;
 
-            embeds.push(await createTweetEmbed(tweet));
+            embeds.push(createTweetEmbed(tweet));
         } else if (url.match(/https?:\/\/(x|twitter)\.com\/(.+)/)) {
             // ユーザーのURLの場合 (https://twitter.com/xxx)
 
@@ -60,7 +60,7 @@ discordClient.on(Events.MessageCreate, async (message) => {
             const user = await getUser(userId);
             if (!user) continue;
 
-            embeds.push(await createUserEmbed(user));
+            embeds.push(createUserEmbed(user));
         }
     }
 
