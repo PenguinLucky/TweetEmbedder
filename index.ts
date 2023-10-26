@@ -59,7 +59,9 @@ discordClient.on(Events.MessageCreate, async (message) => {
             const tweet = await getTweet(tweetId, authorId);
             if (!tweet) continue;
 
-            embeds.push(createTweetEmbed(tweet));
+            for (const tweetEmbed of createTweetEmbed(tweet)) {
+                embeds.push(tweetEmbed);
+            }
         } else if (url.match(/https?:\/\/(x|twitter)\.com\/(.+)/)) {
             // ユーザーのURLの場合 (https://twitter.com/xxx)
 

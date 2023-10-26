@@ -15,3 +15,21 @@ export async function getUser(userId: string): Promise<fxtwitter.User | null> {
     if (json.code !== 200) return null;
     return json.user ?? null;
 }
+
+export function getTweetImageUrlList(tweet: fxtwitter.Tweet): string[] {
+    let imageUrlList: string[] = [];
+
+    if (tweet.media?.photos) {
+        for (const photo of tweet.media.photos) {
+            imageUrlList.push(photo.url);
+        }
+    }
+
+    if (tweet.media?.videos) {
+        for (const video of tweet.media.videos) {
+            imageUrlList.push(video.thumbnail_url);
+        }
+    }
+
+    return imageUrlList;
+}

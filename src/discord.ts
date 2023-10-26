@@ -1,7 +1,9 @@
 import { EmbedBuilder } from "discord.js";
 import { fxtwitter } from "./types/fxtwitter";
+import { getTweetImageUrlList } from "./fxtwitter";
 
-export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder {
+export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder[] {
+    const embeds: EmbedBuilder[] = [];
     const embed = new EmbedBuilder();
 
     embed.setAuthor({
@@ -9,12 +11,6 @@ export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder {
         iconURL: tweet.author.avatar_url,
         url: tweet.author.url,
     });
-
-    embed.setDescription(tweet.text);
-
-    if (tweet.created_at) {
-        embed.setTimestamp(new Date(tweet.created_at));
-    }
 
     embed.addFields([
         {
@@ -29,22 +25,36 @@ export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder {
         },
     ]);
 
-    if (tweet.media?.mosaic) {
-        embed.setImage(tweet.media.mosaic.formats.jpeg);
-    } else if (tweet.media?.photos) {
-        embed.setImage(tweet.media.photos[0].url);
-    } else if (tweet.media?.videos) {
-        embed.setImage(tweet.media.videos[0].thumbnail_url);
-    }
-
     embed.setFooter({
         text: "Twitter",
         iconURL: "https://abs.twimg.com/icons/apple-touch-icon-192x192.png",
     });
 
+    embed.setDescription(tweet.text);
+    embed.setURL(tweet.url);
     embed.setColor("#1DA0F2");
 
-    return embed;
+    if (tweet.created_at) {
+        embed.setTimestamp(new Date(tweet.created_at));
+    }
+
+    let imageUrlList = getTweetImageUrlList(tweet);
+    const imageUrl = imageUrlList.shift();
+
+    if (imageUrl) {
+        embed.setImage(imageUrl);
+    }
+
+    embeds.push(embed);
+
+    for (const imageUrl of imageUrlList) {
+        const embed = new EmbedBuilder();
+        embed.setURL(tweet.url);
+        embed.setImage(imageUrl);
+        embeds.push(embed);
+    }
+
+    return embeds;
 }
 
 export function createUserEmbed(user: fxtwitter.User): EmbedBuilder {
