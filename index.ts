@@ -35,10 +35,7 @@ discordClient.on(Events.MessageCreate, async (message) => {
     if (message.author.bot || message.webhookId) return;
 
     // メッセージに含まれるURLを取得する
-    const urlRegex = /(https?:\/\/[^\s]+)/g; // URLの正規表現
-    const urls = message.content.match(urlRegex);
-
-    // URLが含まれていない場合は処理を終了
+    const urls = message.content.match(/(https?:\/\/[^\s]+)/g);
     if (!urls) return;
 
     const embeds: EmbedBuilder[] = [];
@@ -58,9 +55,7 @@ discordClient.on(Events.MessageCreate, async (message) => {
             const tweet = await getTweet(tweetId, authorId);
             if (!tweet) continue;
 
-            for (const tweetEmbed of createTweetEmbed(tweet)) {
-                embeds.push(tweetEmbed);
-            }
+            embeds.push(...createTweetEmbed(tweet));
         } else if (url.match(/https?:\/\/(x|twitter)\.com\/(.+)/)) {
             // ユーザーのURLの場合 (https://twitter.com/xxx)
 
