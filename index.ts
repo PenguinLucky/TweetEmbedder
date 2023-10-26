@@ -14,11 +14,13 @@ const discordClient = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
 });
 
-setInterval(() => {
+function setActivity() {
     // プレイ中にサーバー数を表示する
     const guildCount = discordClient.guilds.cache.size;
     discordClient.user?.setActivity(`${guildCount} Guilds`, { type: ActivityType.Playing });
-}, 1000 * 60 * 10);
+}
+
+setInterval(setActivity, 1000 * 60 * 10);
 
 discordClient.on(Events.ClientReady, () => {
     console.log("====================================");
@@ -26,10 +28,7 @@ discordClient.on(Events.ClientReady, () => {
     console.log("Client ID: ", discordClient.user?.id);
     console.log("Client Tag: ", discordClient.user?.tag);
     console.log("====================================");
-
-    // プレイ中にサーバー数を表示する
-    const guildCount = discordClient.guilds.cache.size;
-    discordClient.user?.setActivity(`${guildCount} Guilds`, { type: ActivityType.Playing });
+    setActivity();
 });
 
 discordClient.on(Events.MessageCreate, async (message) => {
