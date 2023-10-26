@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import path from "path";
-import { Client, Events, EmbedBuilder, GatewayIntentBits, ActivityType } from "discord.js";
+import { Client, GatewayIntentBits, Events, ActivityType, EmbedBuilder, MessageType } from "discord.js";
 import { getTweet, getUser } from "./src/fxtwitter";
 import { createTweetEmbed, createUserEmbed } from "./src/discord";
 
@@ -80,6 +80,21 @@ discordClient.on(Events.MessageCreate, async (message) => {
             },
         })
         .catch(() => {});
+});
+
+discordClient.on(Events.MessageDelete, async (deletedMessage) => {
+    if (deletedMessage.author?.bot || deletedMessage.webhookId) return;
+    if (!deletedMessage.content?.match(/https?:\/\/(x|twitter)\.com/)) return;
+
+    // メッセージが削除されたときに、このBotが送信したメッセージを削除する
+    const messages = await deletedMessage.channel.messages.fetch({ around: deletedMessage.id });
+    const thisBotMessages = messages.filter((message) => {
+        return message.author.id === discordClient.user?.id && message.type === MessageType.Reply && message.reference?.messageId === deletedMessage.id;
+    });
+
+    thisBotMessages.forEach((botMessage) => {
+        botMessage.delete().catch(() => {});
+    });
 });
 
 discordClient.login(process.env.DISCORD_TOKEN);
