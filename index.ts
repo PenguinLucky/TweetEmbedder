@@ -17,7 +17,7 @@ const discordClient = new Client({
 setInterval(() => {
     // プレイ中にサーバー数を表示する
     const guildCount = discordClient.guilds.cache.size;
-    discordClient.user?.setActivity(`${guildCount} guilds`, { type: ActivityType.Playing });
+    discordClient.user?.setActivity(`${guildCount} Guilds`, { type: ActivityType.Playing });
 }, 1000 * 60 * 10);
 
 discordClient.on(Events.ClientReady, () => {
@@ -29,7 +29,7 @@ discordClient.on(Events.ClientReady, () => {
 
     // プレイ中にサーバー数を表示する
     const guildCount = discordClient.guilds.cache.size;
-    discordClient.user?.setActivity(`${guildCount} guilds`, { type: ActivityType.Playing });
+    discordClient.user?.setActivity(`${guildCount} Guilds`, { type: ActivityType.Playing });
 });
 
 discordClient.on(Events.MessageCreate, async (message) => {
