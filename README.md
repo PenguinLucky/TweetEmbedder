@@ -1,13 +1,13 @@
 <div align="center">
   <h1>Twitter Embeds Is Back!!</h1>
 
-[Invite](https://discord.com/api/oauth2/authorize?client_id=1166385565072113705&permissions=274877925376&scope=bot) |
+[Invite](https://discord.com/api/oauth2/authorize?client_id=1166385565072113705&permissions=274877990912&scope=bot) |
 [Features](#features) |
 [日本語](README.ja.md)
 
 </div>
 
-## [Invite](https://discord.com/api/oauth2/authorize?client_id=1166385565072113705&permissions=274877925376&scope=bot)
+## [Invite](https://discord.com/api/oauth2/authorize?client_id=1166385565072113705&permissions=274877990912&scope=bot)
 [![Discord Bots](https://top.gg/api/widget/1166385565072113705.svg)](https://top.gg/bot/1166385565072113705)
 
 ## Features
