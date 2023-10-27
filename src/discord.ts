@@ -7,7 +7,7 @@ export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder[] {
     const embed = new EmbedBuilder();
 
     embed.setAuthor({
-        name: `${tweet.author.name} (@${tweet.author.screen_name})`,
+        name: `${tweet.author.name} (@${tweet.author.screen_name})`.slice(0, 253) + "...",
         iconURL: tweet.author.avatar_url,
         url: tweet.author.url,
     });
@@ -30,7 +30,7 @@ export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder[] {
         iconURL: "https://abs.twimg.com/icons/apple-touch-icon-192x192.png",
     });
 
-    embed.setDescription(tweet.text);
+    embed.setDescription(tweet.text.slice(0, 4093) + "...");
     embed.setURL(tweet.url);
     embed.setColor("#1DA0F2");
 
@@ -48,6 +48,7 @@ export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder[] {
     embeds.push(embed);
 
     for (const imageUrl of imageUrlList) {
+        if (embeds.length >= 10) break;
         const embed = new EmbedBuilder();
         embed.setURL(tweet.url);
         embed.setImage(imageUrl);
@@ -60,9 +61,9 @@ export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder[] {
 export function createUserEmbed(user: fxtwitter.User): EmbedBuilder {
     const embed = new EmbedBuilder();
 
-    embed.setTitle(user.name);
+    embed.setTitle(user.name.slice(0, 253) + "...");
     embed.setURL(user.url);
-    embed.setDescription(user.description);
+    embed.setDescription(user.description.slice(0, 4093) + "...");
     embed.setThumbnail(user.avatar_url);
     embed.setImage(user.banner_url);
     embed.setColor("#1DA0F2");
