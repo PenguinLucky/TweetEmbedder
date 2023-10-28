@@ -3,6 +3,7 @@ import path from "path";
 import { Client, GatewayIntentBits, Events, ActivityType, EmbedBuilder, MessageType } from "discord.js";
 import { getTweet, getUser } from "./src/fxtwitter";
 import { createTweetEmbed, createUserEmbed } from "./src/discord";
+import { AutoPoster } from "topgg-autoposter";
 
 dotenv.config({ path: path.join(__dirname, ".env") });
 
@@ -10,9 +11,15 @@ if (!process.env.DISCORD_TOKEN) {
     throw new Error("discord token is not defined");
 }
 
+if (!process.env.TOPGG_TOKEN) {
+    throw new Error("top.gg token is not defined");
+}
+
 const discordClient = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
 });
+
+const poster = AutoPoster(process.env.TOPGG_TOKEN, discordClient);
 
 function setActivity() {
     // プレイ中にサーバー数を表示する

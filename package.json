@@ -22,7 +22,8 @@
   "dependencies": {
     "@types/dotenv": "^8.2.0",
     "discord.js": "^14.13.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "topgg-autoposter": "^2.0.1"
   },
   "devDependencies": {
     "@types/md5": "^2.3.4",
