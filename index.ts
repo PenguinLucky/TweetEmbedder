@@ -38,6 +38,10 @@ discordClient.on(Events.ClientReady, () => {
     setActivity();
 });
 
+poster.on("posted", () => {
+    console.log("Posted stats to top.gg");
+});
+
 discordClient.on(Events.MessageCreate, async (message) => {
     if (message.author.bot || message.webhookId) return;
 
