@@ -39,7 +39,8 @@ export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder[] {
         iconURL: "https://abs.twimg.com/icons/apple-touch-icon-192x192.png",
     });
 
-    embed.setDescription(truncate(tweet.text, descriptionLength));
+    const description = truncate(tweet.text, descriptionLength);
+    embed.setDescription(description.length > 0 ? description : null);
     embed.setURL(tweet.url);
     embed.setColor("#1DA0F2");
 
@@ -70,9 +71,13 @@ export function createTweetEmbed(tweet: fxtwitter.Tweet): EmbedBuilder[] {
 export function createUserEmbed(user: fxtwitter.User): EmbedBuilder {
     const embed = new EmbedBuilder();
 
-    embed.setTitle(truncate(user.name, titleLength));
+    const title = truncate(user.name, titleLength);
+    embed.setTitle(title.length > 0 ? title : null);
+
+    const description = truncate(user.description, descriptionLength);
+    embed.setDescription(description.length > 0 ? description : null);
+
     embed.setURL(user.url);
-    embed.setDescription(truncate(user.description, descriptionLength));
     embed.setThumbnail(user.avatar_url);
     embed.setImage(user.banner_url);
     embed.setColor("#1DA0F2");
