@@ -7,6 +7,7 @@ const titleLength = 256;
 const descriptionLength = 4096;
 
 function truncate(text: string, length: number): string {
+    if (text.length <= length) return text;
     return text.slice(0, length - 3) + "...";
 }
 
