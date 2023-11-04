@@ -3,6 +3,7 @@
 
 [招待する](https://discord.com/api/oauth2/authorize?client_id=1166385565072113705&permissions=274877990912&scope=bot) |
 [機能](#features) |
+[利用規約](bot/terms-of-service.ja.md) |
 [プライバシーポリシー](bot/privacy-policy.ja.md) |
 [English](README.md)
 

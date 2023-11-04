@@ -3,6 +3,7 @@
 
 [Invite](https://discord.com/api/oauth2/authorize?client_id=1166385565072113705&permissions=274877990912&scope=bot) |
 [Features](#features) |
+[Terms of Service](bot/terms-of-service.md) |
 [Privacy Policy](bot/privacy-policy.md) |
 [日本語](README.ja.md)
 
